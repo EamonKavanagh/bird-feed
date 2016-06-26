@@ -22,7 +22,7 @@ WITH CLUSTERING ORDER BY (date DESC);
 
 DROP TABLE IF EXISTS overall;
 CREATE TABLE overall (
-    year varchar, 
+    year text, 
     date date, 
     count int, 
     unique int, 
