@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block extension %}
+<div id="project-wrapper">
+    <img src="/static/bird-feed-logo-small.png">
+    
+    <br><br>
+    
+    a real-time bird tracker for Central Park
+    
+    <br><br><br>
+    
+    <form method="post">
+        <input type="text" name="feed" autocomplete="off" placeholder="Enter a bird or family of birds">
+    
+        <br>
+    
+        <small>(leave blank to see all birds)</small>
+    
+        <br><br>
+    
+        <input type="submit" value="Feed Me">
+        <br>
+        <small><font color="red">{{ error }}</font></small>
+    </form>
+    
+    
+    
+    
+    
+    
+<div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block extension %}
+    <div id="title"><h1>{{ title }}</h1></div>
+    <div id="top-bar">
+        <div class="label"><h4>Trending</h4></div>
+        <div class="label"><h4>Click to See Birds Near Your Location</h4></div>
+        <div class="label"><h4>Near Me</h4></div>
+    </div>
+    <div class="birds" id="trending"></div>
+    <div id="map"></div>
+    <div class="birds" id="near-me"></div>
+    
+    <br><br>
+    
+    <div id="chart_div"></div>
+    
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/drawChart.js"></script>
+    <script src="/static/js/track.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap" async defer></script>
+     <script src="/static/js/trending.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script>
+        google.charts.load('current', {'packages':['line', 'corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+    </script>
+{% endblock %}
