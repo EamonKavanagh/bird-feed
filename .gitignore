@@ -1,0 +1,9 @@
+*.iml
+*.pyc
+.idea/
+backend/target/
+backend/src/main/resources/
+frontend/app/utils/secret.py
+fontend/app/static/*.png
+frontend/app/static/birds/
+frontend/app/static/icons/

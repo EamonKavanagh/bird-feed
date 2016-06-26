@@ -1,0 +1,37 @@
+CREATE KEYSPACE birdfeed WITH replication = {'class':'SimpleStrategy', 'replication_factor':2};
+
+USE birdfeed;
+
+DROP TABLE IF EXISTS families;
+CREATE TABLE families (
+    family text, 
+    date date, 
+    count int, 
+    unique int, 
+    PRIMARY KEY(family, date))
+WITH CLUSTERING ORDER BY (date DESC);
+
+DROP TABLE IF EXISTS names;
+CREATE TABLE names (
+    name text, 
+    date date, 
+    count int, 
+    unique int, 
+    PRIMARY KEY(name, date))
+WITH CLUSTERING ORDER BY (date DESC);
+
+DROP TABLE IF EXISTS overall;
+CREATE TABLE overall (
+    year varchar, 
+    date date, 
+    count int, 
+    unique int, 
+    PRIMARY KEY(year, date)) WITH CLUSTERING ORDER BY (date DESC);
+
+DROP TABLE IF EXISTS trending;
+CREATE TABLE trending (
+    family text,
+    name text,
+    count int,
+    PRIMARY KEY (family, name))
+WITH default_time_to_live=10;
