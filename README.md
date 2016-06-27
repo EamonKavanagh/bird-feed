@@ -61,4 +61,4 @@ Real-time processing includes:
 
 ## Databases
 
-Both Cassandra and Elasticsearch are used to display data on the front end.  Cassandra is able to handle the large volume of writes that are needed to keep an up-to-date view of what birds are trending.  Cassandra has been set up with TTLs (time to live) on all trending writes so any record selected is always current. Elasticsearch, on the other hand, easily handles geographic and time filtering with it's robust query language.  Geohashes are also calculated on recent data to determine hotspots across the park.
+Both Cassandra and Elasticsearch are used to display data on the front end.  Cassandra is able to handle the large volume of writes that are needed to keep an up-to-date view of what birds are trending.  Cassandra has been set up with TTLs (time to live) on all trending writes so any record selected is fresh. Elasticsearch, on the other hand, easily handles geographic and time filtering with it's robust query language.  Geohashes are also calculated on recent data to determine hotspots across the park.
