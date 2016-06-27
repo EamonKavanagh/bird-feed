@@ -37,7 +37,12 @@ Each record is placed onto a Kafka queue where it is broadcast to the rest of th
 
 ## Batch Processing
 
-The batch processing for Bird Feed makes use of Spark's data frame API.  Since total and unique sightings for families and overall can be derived from processing on the level of names, caching is used to speed up calculations.  Data is recalculated every night from raw logs to enable changes in the future and avoid losing data due to potential mistakes.  The calculations are persisted in Cassandra for access on the front end.
+The batch processing for Bird Feed makes use of Spark's data frame API.  Since total and unique sightings for families and overall can be derived from processing on the level of names, caching is used to speed up calculations.  Data is recalculated every night from raw logs to enable changes in the future and avoid losing data due to potential mistakes.  The calculations are persisted in Cassandra for access on the front end.  
+
+Batch processes include:
+
+- Calculating total sightings overall, by family, and by bird for each day
+- Calculating unique sightings overall, by family, and by bird for each day
 
 
 ## Real-time Processing
@@ -46,7 +51,14 @@ Real-time processing is handled by Flink.  Flink allows you to impose windows up
 
 Windowing also allows you to set watermarks to handle out-of-order data in a reliable fashion.  Watermarks are inserted into the stream and indicate when a calculation on a window should occur.  This gives the user a sense of accuracy on the calculation as long as the watermarks are reflective of the data.  For example, if you know that 99.9% of your data is always within 5 seconds of each other, you can set a periodic event time watermark based on event time with a delay of 5 seconds.
 
-Data is passed to both Cassandra (trending) and Elasticsearch (near me/hotspots) for short-term persistence.
+Data is passed to both Cassandra and Elasticsearch for short-term persistence.
+
+Real-time processing includes:
+
+- Calculating total sightings by bird in a minute-long five second sliding window.
+- Updating the current position of each bird in Elasticsearch for hotspots and 'near me' queries.
 
 
-## Databases & Queries
+## Databases
+
+Both Cassandra and Elasticsearch are used to display data on the front end.  Cassandra is able to handle the large volume of writes that are needed to keep an up-to-date view of what birds are trending.  Cassandra has been set up with TTLs (time to live) on all trending writes so any record selected is always current. Elasticsearch, on the other hand, easily handles geographic and time filtering with it's robust query language.  Geohashes are also calculated on recent data to determine hotspots across the park.
