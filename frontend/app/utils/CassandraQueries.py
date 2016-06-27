@@ -1,3 +1,4 @@
+import datetime
 import heapq
 
 from cassandra.cluster import Cluster
@@ -47,9 +48,11 @@ class CassandraQueries:
                             date, count, unique
                         FROM
                             overall
+                        WHERE
+                            year = '%d'
                         ORDER BY
                             date DESC
-                        LIMIT 7"""
+                        LIMIT 7"""%(datetime.datetime.now().year)
         results = self.session.execute(query)
         return [(str(result.date), result.count, result.unique) for result in results][::-1]
         
