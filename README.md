@@ -13,9 +13,9 @@ Bird Feed is powered by:
 - Flask
 
 
-## Preview
+## Demo
 
-
+A video of the project in action can be seen [here](https://vimeo.com/175286105).
 
 
 ## Pipeline
